@@ -25,11 +25,17 @@ async function downloadGyro(version) {
 
   const dl_path = await cache.downloadTool(`https://github.com/mattnite/gyro/releases/download/${version}/gyro-${version}-${os_tag}-x86_64.${ext}`);
   const gyro_path = ext === 'zip'
-    ? await cache.extractZip(dl_path)
-    : await cache.extractTar(dl_path);
+    ? await cache.extractZip(dl_path, 'gyro')
+    : await cache.extractTar(dl_path, 'gyro');
+  consle.log(`gyro path: ${gyro_path}`);
 
-  const bin_path = path.join(gyro_path, 'bin');
-  return await cache.cacheDir(bin_path, 'gyro', version)
+  const bin_path = path.join(gyro_path, 'gyro', 'bin');
+  consle.log(`bin path: ${bin_path}`);
+
+  const cache_path = await cache.cacheDir(bin_path, 'gyro', version)
+  consle.log(`cache path: ${cache_path}`);
+
+  return cache_path;
 }
 
 async function main() {
