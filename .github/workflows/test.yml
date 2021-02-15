@@ -8,8 +8,8 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, windows-latest]
     steps:
     - uses: actions/checkout@v2
     - uses: ./
-    - run: gyro --help
+    - run: gyro add gyro/version
