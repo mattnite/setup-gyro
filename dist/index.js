@@ -30,7 +30,7 @@ async function downloadGyro(version) {
     : await cache.extractTar(dl_path);
   console.log(`gyro path: ${gyro_path}`);
 
-  const bin_path = path.join(gyro_path, name);
+  const bin_path = path.join(gyro_path, name, 'bin');
   console.log(`bin path: ${bin_path}`);
 
   const cache_path = await cache.cacheDir(bin_path, 'gyro', name)
