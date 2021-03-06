@@ -6,7 +6,7 @@ const os = require('os');
 const path = require('path');
 
 async function resolveLatest(version) {
-  return '0.1.0';
+  return '0.1.1';
 }
 
 async function downloadGyro(version) {
