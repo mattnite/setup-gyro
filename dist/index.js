@@ -13,7 +13,7 @@ const os = __nccwpck_require__(2087);
 const path = __nccwpck_require__(5622);
 
 async function resolveLatest(version) {
-  return '0.1.0';
+  return '0.1.1';
 }
 
 async function downloadGyro(version) {
