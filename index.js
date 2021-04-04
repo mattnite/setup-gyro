@@ -40,6 +40,7 @@ async function downloadGyro(version) {
     win32: ["windows", "zip"],
   }[os.platform()];
 
+  core.info(`downloadind gyro ${version}`);
   const name = `gyro-${version}-${os_tag}-x86_64`;
   const dl_path = await cache.downloadTool(`https://github.com/mattnite/gyro/releases/download/${version}/${name}.${ext}`);
   const gyro_path = ext === 'zip'
