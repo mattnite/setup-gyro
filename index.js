@@ -21,7 +21,8 @@ async function resolveLatest() {
       core.setFailed("no valid releases");
     }
 
-    return releases.reduce((max, current) => {
+    return releases.reduce((max, rel) => {
+      const current = rel.tag_name
       if (max !== null)
         return semver.gt(current, max) ? current : max;
       else
