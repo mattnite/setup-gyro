@@ -9,8 +9,9 @@ const os = require('os');
 const path = require('path');
 const GyroOctokit = Octokit.plugin(throttling);
 
+const token = actions.getInput('access-token');
 const octokit = new GyroOctokit({
-  //auth: "token " + process.env.TOKEN,
+  auth: token ? "token " + token : undefined,
   throttle: {
     onRateLimit: (retryAfter, options) => {
       octokit.log.warn(
