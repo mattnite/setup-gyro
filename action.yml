@@ -10,6 +10,7 @@ inputs:
     default: 'latest'
   access-token: 'github access token'
     required: true
+    default: null
 author: mattnite
 runs:
   using: 'node12'
