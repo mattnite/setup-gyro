@@ -7,4 +7,6 @@ simply:
 
 ```yaml
 - uses: mattnite/setup-gyro@v1
+  with:
+    access-token: ${{ secrets.GITHUB_TOKEN }}
 ```
