@@ -3,11 +3,34 @@ const actions = require('@actions/core');
 const github = require('@actions/github');
 const cache = require('@actions/tool-cache')
 const { Octokit } = require("@octokit/rest");
+const { throttling } = require("@octokit/plugin-throttling");
 const semver = require('semver');
 const os = require('os');
 const path = require('path');
+const GyroOctokit = Octokit.plugin(throttling);
 
-const octokit = new Octokit()
+const octokit = new GyroOctokit({
+  //auth: "token " + process.env.TOKEN,
+  throttle: {
+    onRateLimit: (retryAfter, options) => {
+      octokit.log.warn(
+        `Request quota exhausted for request ${options.method} ${options.url}`
+      );
+
+      // Retry twice after hitting a rate limit error, then give up
+      if (options.request.retryCount <= 2) {
+        console.log(`Retrying after ${retryAfter} seconds!`);
+        return true;
+      }
+    },
+    onAbuseLimit: (retryAfter, options) => {
+      // does not retry, only logs a warning
+      octokit.log.warn(
+        `Abuse detected for request ${options.method} ${options.url}`
+      );
+    },
+  },
+})
 
 async function resolveLatest() {
   try {
