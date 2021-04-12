@@ -17,7 +17,7 @@ const path = __nccwpck_require__(5622);
 const GyroOctokit = Octokit.plugin(throttling);
 
 const octokit = new GyroOctokit({
-  //auth: "token " + process.env.TOKEN,
+  auth: "token " + actions.getInput('access-token'),
   throttle: {
     onRateLimit: (retryAfter, options) => {
       octokit.log.warn(

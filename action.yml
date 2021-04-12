@@ -8,6 +8,8 @@ inputs:
     description: 'gyro version to install'
     required: true
     default: 'latest'
+  access-token: 'github access token'
+    required: true
 author: mattnite
 runs:
   using: 'node12'
